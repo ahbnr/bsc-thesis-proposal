@@ -1,0 +1,376 @@
+\RequirePackage{silence}
+\WarningFilter{titlesec}{Non standard sectioning command detected}
+\WarningFilter{scrartcl}{You've used obsolete option `onelinecaption'}
+\WarningFilter{scrartcl}{Activating an ugly workaround for a missing}
+\WarningFilter{scrartcl}{deprecated option `enabledeprecatedfontcommands'.}
+\WarningFilter{scrartcl}{Usage of package `fancyhdr' together}
+\WarningFilter{scrartcl}{Usage of package `titlesec' together}
+
+\documentclass[paper=a4,nochapname,accentcolor=tud9c]{tudexercise}
+
+\usepackage{biblatex}
+\addbibresource{Links.bib}
+
+\usepackage{blindtext}
+\usepackage{tikz}
+\usetikzlibrary{shapes.misc,arrows,positioning}
+
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\makeatletter
+\def\namedlabel#1#2{\begingroup
+    #1%
+    \def\@currentlabel{\thedescriptcount}%
+    \phantomsection\label{#2}\endgroup
+}
+\makeatother
+
+\newcounter{descriptcount}
+\newlist{enumdescript}{description}{2}
+\setlist[enumdescript,1]{%
+  before={\setcounter{descriptcount}{0}%
+  \renewcommand*\thedescriptcount{[\Alph{descriptcount}]}}
+  ,font=\bfseries\stepcounter{descriptcount}\thedescriptcount~%
+}
+\setlist[enumdescript,2]{%
+  before={\setcounter{descriptcount}{0}%
+          \renewcommand*\thedescriptcount{\roman{descriptcount}}}
+  ,font=\bfseries\stepcounter{descriptcount}\thedescriptcount~
+}
+
+\title{Validation of behavior specifications for ABS models using Behavioral Types}
+\subtitle{Bachelor Thesis Proposal, Software Engineering Group}
+\subsubtitle{Anton Haubner}
+
+%\raggedbottom
+\begin{document}
+%
+\maketitle
+%
+\tableofcontents
+
+\section{Motivation}
+Reasoning about software which employs asynchronous interaction between its
+components is usually difficult.
+For example, one might want to ensure, that said components adhere to a specific
+protocol, or that resources are properly allocated and released between uses.
+
+When manually checking a software model against a protocol specification becomes
+to labor intensive and time consuming, automatic verification can reduce the
+workload and help to avoid human errors.
+
+Furthermore, if behavior can be dynamically added to the software during execution,
+for instance by an interface of the runtime, the set of properties which
+can be proven by static analysis of the software can become very limited.
+
+Even in this case, some guarantees can still be enforced, if the schedulers of
+asynchronous processes are aware of a protocol and only activate those tasks
+which do not violate it.
+
+\paragraph{Thesis Topic}
+
+The Abstract Behavioral Specification language (ABS) is intended for modelling
+``concurrent, distributed, object-oriented'' software systems (TODO: link) and
+aims for `verifiable design'' via a suite of external tools (TODO: link).
+
+This thesis is based on work by (TODO: Reference) and aims at developing a tool
+for automatically verifying whether objects within an ABS software model comply
+with a communication protocol, which can be specified using Behavioral Types
+(TODO: Link).
+
+Furthermore, it will extend all participating objects with a scheduler which
+ensures, that only tasks are activated during execution that the protocol permits.
+This is necessary, since (tool X) allows to asynchronously call any method during
+runtime, which will invalidate static verification.
+This idea has been explored by (TODO) in (...).
+
+% Note that this approach can not guarantee 
+
+(...) also introduces Async Dynamic Logic (ADL) such that ADL formulas can
+accompany protocol specifications and allow to express logical constraints on the
+program state before method invocations and after their termination.
+Although automatic verification of those constraints could  be implemented using
+Key-ABS (LINK), it will likely exceed the timing constraints of the thesis.
+Instead, those constraints will optionally be implemented as runtime assertions,
+if time allows.
+
+\section{Working Packages}
+%
+\includegraphics[width=\linewidth]{assets/architecture.pdf}
+
+All of the following work packages include a time investment proportional to the
+complexity of the package, which is reserved for conducting the necessary
+research using papers relevant to the topic. Also some time will be required for
+detailed planning of the implementation of the package and recording the results
+within the thesis document.
+
+\begin{enumdescript}
+\item[\namedlabel{Behavioral Types syntax \& parser}{WPsyntaxAndParser}]%
+    The verification tool will require an input source where developers can
+    define their protocol specifications using Behavioral Types.
+
+    Coupling between the ABS compiler and the verification tool shall be avoided
+    as much as possible, such that no further complexity is introduced into Core
+    ABS (TODO Link) and the projects can be developed and maintained independently.
+    
+    Therefore the verification tool shall parse its input from a file independent
+    from the ABS source code of the software model.
+
+    This work package includes:
+    \begin{itemize}
+      \item deriving a practical syntax for defining Behavioral Types from (LINKS)
+      \item developing a parser which provides the types as a data structure
+        suitable for...
+      \begin{itemize}
+        \item association with AST nodes of the ABS source file
+        \item processing by the type checker (Refernce working package) (Projection (Reference), ...)
+      \end{itemize}
+      \item this does not include syntax and parsing functionality for explicit
+        local types, see work package X
+    \end{itemize}
+  \item[\namedlabel{Passing AST from ABS parser to tool}{WPPassAST}]%
+    Most further work packages require the external types to be associated with
+    the AST of the software model's ABS source code.
+
+    Code duplication should be avoided and therefore the AST generated by the
+    ABS compiler shall be used, however as mentioned in (reference package),
+    the ABS compiler shall be modified as few as possible.
+
+    Also some work packages (links) entail modifying the AST.
+    Therefore the potentially modified AST must be passed back to the ABS
+    compiler such that it can be compiled into an executable
+    form. The thesis only aims to create an AST compatible with the Erlang backend.
+    %
+    This work package shall produce a tool with the following work flow:
+    \begin{enumerate}
+      \item parsing software model source code and applying Core ABS type
+        checking to it using the ABS frontend.
+      \item invoking parser of external type specifications as specified in work
+        package X
+      \item loading both data structures into the tool. After work packages
+        X or Y have been completed, this step will include modifycations to
+        the AST using the external type definitons
+      \item passing (modified) AST back to ABS compiler to complete compilation
+    \end{enumerate}
+  \item[\namedlabel{Projection \& typechecking local action order}{WPProjectionAndTC}]%
+    For the most part, the external type definitions will specify a global
+    protocol which needs to be \emph{projected} on the individual units of the
+    software model (objects, methods).
+    This ultimately allows for typechecking methods against the specification
+    and generating schedulers (see ...).
+    %
+    This work package includes:
+    \begin{itemize}
+      \item implementing projection
+      \item implementing typechecker which statically ensures well-formedness
+        of the program
+        \begin{itemize}
+          \item this does not include checking for deadlocks or verifying ADL
+            formulas embedded within the types (see ...)
+        \end{itemize}
+    \end{itemize}
+  \item[\namedlabel{Extending ABS scheduler functionality}{WPExtendScheduler}]%
+    The implementation of work package X requires, that schedulers are able to
+    halt execution, if the execution of any available process would violate the
+    specified protocol. They should continue execution, as soon as a viable
+    process is available.
+
+    As of now, this this not supported by user defined schedulers in ABS,
+    therefore it must be implemented as part of the thesis.
+
+    This work package includes:
+    \begin{itemize}
+      \item extending ABS compiler frontend to support scheduler functions which
+        may not return a process to execute (support for \texttt{Maybe<...>}
+        return type).
+        \item this includes modifying the parser and AST generation
+        \item this does not include modifications to the (Erlang) backend
+          compiler. The necessary adjustments to the backend compiler will be
+          provided by Rudi X, one of the core developers of ABS.
+    \end{itemize}
+  \item[\namedlabel{Generating schedulers}{WPGenSchedulers}]%
+    To ensure the protocol specified by the external type definitions are not
+    violated at runtime due to remote procedure calls, scheduler functions (link)
+    shall be generated from the type definitions for all objects participating
+    in the protocol and integrated into the AST of the software model.
+
+    This work package includes:
+    \begin{itemize}
+      \item deriving Session Automata (link) from the type definitions.
+      \item transforming the Session Automata into pure scheduler functions (reference)
+      \item validating, that the constructed automata indeed comply to the
+        type specification
+      \item integrating the schedulers into the AST provided by the ABS compiler
+    \end{itemize}
+  \item[\namedlabel{Explicit local types}{WPExplicitTypes}]%
+    As presented in X, behavioral types may explicitly be formulated to specific
+    classes, not only as one global specification.
+
+    This can be used to specify valid behavior for an object across the whole
+    protocol specification. For example, a file class shall only allow execution
+    of its ``read'' method in between invocations of its open and close methods.
+
+    This work package includes:
+    \begin{itemize}
+      \item extending the syntax and parser of work package X with support for
+        explicit local types
+      \item developing a notion of compatibility between explicit local types
+        and local types projected from the global one.
+      \item extending type checker of work package X such that it compares
+        projected local types against explicit local ones to determine
+        compatibility
+      \item replace projected local types with explicit ones, if compatibility
+        test was successful.
+    \end{itemize}
+  \item[\namedlabel{Optional: Extending ABS Future wrapper}{WPAnyFut}]%
+    Implementation of work package X requires, that asynchronous method
+    invocations may not only return objects, but data of any type, since the ADL
+    formulas as described in ... allow to reason about the state of returned
+    results of methods, which may belong to any type.
+
+    As of now, this this not supported by the \texttt{Fut<T>} type of ABS and
+    therefore the compiler frontend and the (Erlang) backend have to be extended.
+
+    This work package includes:
+    \begin{itemize}
+      \item extending ABS compiler frontend to support wrapping any type
+        \texttt{T} in Futures \texttt{Fut<T>}
+      \item this includes modifying the parser and AST generation
+        \item this does not include modifications to the (Erlang) backend
+          compiler. The necessary adjustments to the backend compiler will be
+          provided by Rudi X, one of the core developers of ABS.
+    \end{itemize}
+  \item[\namedlabel{Optional: Generating assertions from ADL formulas}{WPAssertions}]%
+    As outlined in (reference), the external type definitions may carry ADL
+    formulas which describe constraints on the models state during execution.
+
+    Those formulas shall be checked during execution of the model by extending
+    the AST with assertion statements (link) which implement the constraints
+    described by the formula.
+
+    This work package includes:
+    \begin{itemize}
+      \item determining a transformation function from ADL formulas to ABS
+        boolean expressions which may be placed in assertions.
+      \item determining correct placement of the assertion statements within
+        the software model's AST
+      \item generating assertion statements and integrating them into the AST
+    \end{itemize}
+\end{enumdescript}
+
+\section{Time Schedule}
+
+\paragraph{Available time}
+%
+A bachelor's thesis has to be written within 6 months.
+It should ammount to about 12 credit points of work, which translate to $12 \mathrm{CP} \cdot 30 \frac{\mathrm{h}}{\mathrm{CP}} = 360 \mathrm{h}$.
+Therefore, when assuming an even distribution of the work, this corresponds to about $14 \mathrm{h}$ per week.
+
+\paragraph{Activity Network}
+
+\resizebox{\columnwidth}{!} {
+\begin{tikzpicture}
+  \node (start)
+        [draw, rounded rectangle]
+        {Start};
+  \node (syntaxAndParser)
+        [draw,rounded rectangle,below right=of start]
+        {\ref{WPsyntaxAndParser} Type Syntax \& Parser \ref{ordersyntaxAndParser}};
+  \node (PassAST)
+        [draw,rounded rectangle,above right=of start]
+        {\ref{WPPassAST} Integrating AST \ref{orderPassAST}};
+  \node (ProjectionAndTC)
+        [draw,rounded rectangle,below right=of PassAST]
+        {\ref{WPProjectionAndTC} Projection \& Typechecking \ref{orderProjectionAndTC}};
+  \node (AnyFut)
+        [draw,rounded rectangle,above=of PassAST]
+        {\ref{WPAnyFut} \texttt{Fut<}\emph{anything}\texttt{>} \ref{orderAnyFut}};
+  \node (ExplicitTypes)
+        [draw,rounded rectangle,right=of ProjectionAndTC]
+        {\ref{WPExplicitTypes} Expl. Local Types \ref{orderExplicitTypes}};
+  \node (Assertions)
+        [draw,rounded rectangle,above=of ExplicitTypes]
+        {\ref{WPAssertions} Assertions \ref{orderAssertions}};
+  \node (GenSchedulers)
+        [draw,rounded rectangle,below=of ExplicitTypes]
+        {\ref{WPGenSchedulers} Generating Schedulers \ref{orderGenSchedulers}};
+  \node (ExtendScheduler)
+        [draw,rounded rectangle,below=of syntaxAndParser]
+        {\ref{WPExtendScheduler} Pausable Schedulers \ref{orderExtendScheduler}};
+  \node (End)
+        [draw,rounded rectangle,double,double distance=0.7mm,right=of ExplicitTypes]
+        {Completion};
+
+      \draw[->] (start) -- (syntaxAndParser);
+      \draw[->] (start) -- (PassAST);
+  \draw[->] (start) to[bend left] (AnyFut);
+  \draw[->] (start) to[bend right] (ExtendScheduler);
+  \draw[->] (syntaxAndParser) -- (ProjectionAndTC);
+  \draw[->] (ProjectionAndTC) -- (ExplicitTypes);
+  \draw[->] (ProjectionAndTC) -- (GenSchedulers);
+  \draw[->] (ProjectionAndTC) -- (Assertions);
+  \draw[->] (PassAST) -- (ProjectionAndTC);
+  \draw[->] (AnyFut) -- (Assertions);
+  \draw[->] (Assertions) -- (End);
+  \draw[->] (ExplicitTypes) -- (End);
+  \draw[->] (GenSchedulers) -- (End);
+  \draw[->] (ExtendScheduler) -- (GenSchedulers);
+\end{tikzpicture}
+}
+
+Derived implementation order:
+\begin{enumerate}[label=(\arabic*)]
+  \item \label{orderExtendScheduler} \ref{WPExtendScheduler} Pausable Schedulers
+  \item \label{orderPassAST} \ref{WPPassAST} Integrating AST
+  \item \label{ordersyntaxAndParser} \ref{WPsyntaxAndParser} Type Syntax \& Parser
+  \item \label{orderProjectionAndTC} \ref{WPProjectionAndTC} Projection \& Typechecking
+  \item \label{orderGenSchedulers} \ref{WPGenSchedulers} Generating Schedulers
+  \item \label{orderExplicitTypes} \ref{WPExplicitTypes} Expl. Local Types
+  \item \label{orderAnyFut} \ref{WPAnyFut} \texttt{Fut<}\emph{anything}\texttt{>}
+  \item \label{orderAssertions} \ref{WPAssertions} Assertions
+\end{enumerate}
+
+\paragraph{Schedule}%
+%
+Available time: 26 weeks.
+\\
+The ``Start Date''/``End Date'' fields are not yet filled in, since the
+starting point of the thesis is as of yet undetermined.
+However, work on the thesis will probably begin around early May.
+
+\medskip
+
+\begin{tabular}{llll}
+Work Package & Alotted Time & Start Date & End Data \\
+\hline
+Pausable Schedulers & 2 weeks & & \\
+Integrating AST & 1.5 weeks & & \\
+Type Syntax \& Parser & 2 weeks & & \\
+Projection \& Typechecking & 5 weeks & & \\
+Generating Schedulers (part 1) & 2.5 weeks & & \\
+Preparation for midway presentation & 1 week & & \\
+Generating Schedulers (part 2) & 2.5 weeks & & \\
+Expl. Local Types & 3 weeks & & \\
+\texttt{Fut<}\emph{anything}\texttt{>} & 1.5 weeks & & \\
+Assertions & 2.5 weeks & & \\
+Final revisions, preparation of final presentation & 2.5 weeks & &
+\end{tabular}
+
+\medskip
+
+Increased preparation effort for exams is to be expected around the time from
+the 8th of July to the 8th of August. This corresponds to about 9.5 weeks from the
+start of the thesis when assuming the 1st of May as starting point.
+Since around that time the work packages with the biggest timeframes are
+scheduled, this should provide a slight safety margin to account for the
+heightened workload.
+
+The implementation of the working package regarding generating schedulers
+\ref{WPGenSchedulers} is split into to parts to accomodate for a week of
+preparation for the intermediate presentation which will probably take place
+around that time.
+
+\printbibliography[heading=subbibintoc]
+
+\end{document}
