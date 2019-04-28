@@ -8,8 +8,8 @@
 
 \documentclass[paper=a4,nochapname,accentcolor=tud9c]{tudexercise}
 
-\usepackage{biblatex}
-\addbibresource{Links.bib}
+\usepackage{biblatex}[defernumbers=true]
+\addbibresource{References.bib}
 
 \usepackage{blindtext}
 \usepackage{tikz}
@@ -71,13 +71,14 @@ which do not violate it.
 \paragraph{Thesis Topic}
 
 The Abstract Behavioral Specification language (ABS) is intended for modelling
-``concurrent, distributed, object-oriented'' software systems (TODO: link) and
-aims for `verifiable design'' via a suite of external tools (TODO: link).
+``concurrent, distributed, object-oriented'' software systems and
+aims for `verifiable design'' via a suite of external tools \cite{absdesign}.
 
-This thesis is based on work by (TODO: Reference) and aims at developing a tool
-for automatically verifying whether objects within an ABS software model comply
-with a communication protocol, which can be specified using Behavioral Types
-(TODO: Link).
+This thesis is based on work by Eduard Kamburjan, Crystal Chang Din and
+Tzu-Chun Chen (\cite{kamburjan2018stateful}, \cite{kamburjan2016session}) and
+aims at developing a tool for automatically verifying whether objects within an
+ABS software model comply with a communication protocol, which can be specified
+using Behavioral Types (TODO: Link).
 
 Furthermore, it will extend all participating objects with a scheduler which
 ensures, that only tasks are activated during execution that the protocol permits.
@@ -371,6 +372,6 @@ The implementation of the working package regarding generating schedulers
 preparation for the intermediate presentation which will probably take place
 around that time.
 
-\printbibliography[heading=subbibintoc]
+\printbibliography[heading=bibnumbered]
 
 \end{document}
