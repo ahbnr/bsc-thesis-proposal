@@ -57,7 +57,7 @@
 % Notes:
 % Multi Party Session Types \subset Session Types \subset Behavioral Types
 
-\title{Static verification and dynamic enforcement of behavior specifications for ABS models}
+\title{Semi-Dynamic Session Types for ABS}
 \subtitle{Bachelor Thesis Proposal, Software Engineering Group}
 \subsubtitle{Anton Haubner}
 
@@ -69,38 +69,38 @@
 \tableofcontents
 
 \section{Motivation}
-Reasoning about software which employs asynchronous interaction between its
-components is usually difficult.
+Reasoning about distributed systems which employ asynchronous interactions between their
+components is usually difficult. % TODO: Redundant?
 For example, one might want to ensure, that said components adhere to a specific
 protocol, or that resources are properly allocated and released between uses.
 
-When manually checking a software model against a protocol specification becomes
-to labor intensive and time consuming, automatic verification can reduce the
-workload and help to avoid human errors.
+When manually checking a model of a distributed system against a protocol
+specification becomes to labor intensive and time consuming, automatic verification
+can reduce the workload and help to avoid human errors.
 
-Furthermore, if behavior can be dynamically added to the software during execution,
+Furthermore, if behavior can be dynamically added to the system during execution,
 for instance by an interface of the runtime, the set of properties which
-can be proven by static analysis of the software can become very limited.
+can be proven by static analysis of the system can become very limited.
 
 Even in this case, some guarantees can still be enforced, if the schedulers of
-asynchronous processes are aware of a protocol and only activate those tasks
+asynchronous processes are aware of a protocol and only schedule those tasks
 which do not violate it.
 
 \paragraph{Thesis Topic}
 
 The Abstract Behavioral Specification language (ABS) is intended for modelling
-``concurrent, distributed, object-oriented'' software systems and
+``distributed, object-oriented'' software systems \cite{johnsen2010abs} and
 aims for ``verifiable design'' via a suite of external tools \cite{absdesign}.
 
-This thesis is based on work by Eduard Kamburjan, Crystal Chang Din and
-Tzu-Chun Chen (\cite{kamburjan2018stateful}, \cite{kamburjan2016session}) and
+This thesis is based on % "new" correct? Really not mentioning authors of central source by name?
+\cite{kamburjan2018stateful, kamburjan2016session} and
 aims at developing a tool for automatically verifying whether objects within an
-ABS software model comply with a communication protocol, which can be specified
-using a variant of Behavioral Types. % (TODO: Konkreter).
+ABS software model comply with a communication protocol, which is specified
+using a variant of Session Types. % (TODO: Konkreter).
 
-Furthermore, it will extend all participating objects with a scheduler \cite{absschedulers} which
+Furthermore, it will extend all participating objects with a scheduler \cite{bjork2013user} which
 ensures, that only those processes are activated that the protocol permits to execute.
-This is necessary, since the ABS Model API \cite{absmodelapi} allows to asynchronously call methods during
+This is necessary, since the ABS Model API \cite{schlatte2018release} allows to asynchronously call methods during
 runtime, which will invalidate static verification.
 This idea has been explored in \cite{kamburjan2016session}.
 
@@ -110,7 +110,8 @@ This idea has been explored in \cite{kamburjan2016session}.
 accompany protocol specifications and allow to express logical constraints on the
 program state before method invocations and after their termination.
 Although automatic verification of those constraints could  be implemented using
-Key-ABS \cite{din2015key}, it will likely exceed the timing constraints of the thesis.
+KeY-ABS \cite{din2015key}, it will likely exceed the time available for
+implementing the thesis.
 Instead, those constraints will optionally be implemented as runtime assertions,
 if time allows.
 
@@ -129,9 +130,9 @@ detailed planning of the implementation of the package and recording the results
 within the thesis document.
 
 \begin{enumdescript}
-\item[\namedlabel{Behavioral Types syntax \& parser}{WPsyntaxAndParser}]%
+\item[\namedlabel{Session Types syntax \& parser}{WPsyntaxAndParser}]%
     The verification tool which is to be developed during the thesis will require
-    an input source where developers can define their protocol specifications using a variant of Behavioral Types.
+    an input source where developers can define their protocol specifications using a variant of Session Types.
 
     Coupling between the ABS compiler and the verification tool shall be avoided
     as much as possible, such that no further complexity is introduced into the ABS
@@ -142,7 +143,7 @@ within the thesis document.
 
     This working package includes:
     \begin{itemize}
-      \item deriving a practical syntax for defining Behavioral Types from \cite{kamburjan2018stateful} and \cite{kamburjan2016session}
+      \item deriving a practical syntax for defining Session Types from \cite{kamburjan2018stateful} and \cite{kamburjan2016session}
       \item developing a parser which provides the types as a data structure
         suitable for...
       \begin{itemize}
@@ -203,24 +204,24 @@ within the thesis document.
 
     This working package includes:
     \begin{itemize}
-      \item extending the ABS compiler frontend to support scheduler functions which
+      \item extending the ABS compiler backend to support scheduler functions which
         may not return a process to execute (support for \texttt{Maybe<...>}
         return type).
-        \item this includes modifying the parser and AST generation
+        % \item this includes modifying the parser and AST generation % TODO It does not?
         \item this does not include modifications to the (Erlang) backend
-          compiler. The necessary adjustments to the backend compiler will be
-          provided by Rudolf Schlatte, PhD, one of the core developers of ABS.
+          compiler. The necessary adjustments to the backend compiler have
+          already been implemented by the ABS developers. %TODO keine Namensnennung?
     \end{itemize}
   \item[\namedlabel{Generating schedulers}{WPGenSchedulers}]%
     To ensure the protocol specified by the external type definitions is not
-    violated at runtime due to calls via the Model API \cite{absmodelapi}, scheduler functions \cite{absschedulers}
+    violated at runtime due to calls via the Model API \cite{schlatte2018release}, scheduler functions \cite{bjork2013user}
     shall be generated from the type definitions for all objects participating
     in the protocol and integrated into the AST of the software model.
 
     This working package includes:
     \begin{itemize}
       \item deriving Session Automata \cite{kamburjan2016session} from the type definitions.
-      \item transforming the Session Automata into pure scheduler functions \cite{absschedulers}
+      \item transforming the Session Automata into pure scheduler functions \cite{bjork2013user}
       \item validating, that the constructed scheduler functions indeed comply with the
         type specification
       \item integrating the schedulers into the AST provided by the ABS compiler
@@ -237,15 +238,13 @@ within the thesis document.
     \begin{itemize}
       \item extending the syntax and parser of working package \ref{WPsyntaxAndParser}
         with support for explicit local types
-      \item developing a notion of compatibility between explicit local types
-        and local types projected from the global one.
       \item extending type checker of working package \ref{WPProjectionAndTC} such
         that it compares projected local types against explicit local ones to
         determine compatibility
       \item replace projected local types with explicit ones, if compatibility
         test was successful.
     \end{itemize}
-  \item[\namedlabel{Optional: Extending ABS Future wrapper}{WPAnyFut}]%
+  \item[\namedlabel{Extending ABS Future wrapper}{WPAnyFut}]%
     Implementation of working package \ref{WPAssertions} requires, that asynchronous method
     invocations may not only return objects, but data of any type, since the ADL
     formulas as described in \cite{kamburjan2018stateful} allow to reason about the state of returned results of methods, which may belong to any type.
@@ -259,8 +258,8 @@ within the thesis document.
         \texttt{T} in Futures \texttt{Fut<T>}
       \item this includes modifying the parser and AST generation
         \item this does not include modifications to the (Erlang) backend
-          compiler. The necessary adjustments to the backend compiler will be
-          provided by Rudolf Schlatte, PhD, one of the core developers of ABS.
+          compiler. The necessary adjustments to the backend compiler have
+          already been implemented by the ABS developers. %TODO keine Namensnennung?
     \end{itemize}
   \item[\namedlabel{Optional: Generating assertions from ADL formulas}{WPAssertions}]%
     As outlined in \cite{kamburjan2018stateful}, the external type definitions
@@ -358,12 +357,12 @@ been determined.
 
 \begin{enumerate}[label=(\arabic*)]
   \item \label{orderExtendScheduler} \ref{WPExtendScheduler} Pausable Schedulers
+  \item \label{orderAnyFut} \ref{WPAnyFut} \texttt{Fut<}\emph{anything}\texttt{>}
   \item \label{orderPassAST} \ref{WPPassAST} Integrating AST
   \item \label{ordersyntaxAndParser} \ref{WPsyntaxAndParser} Type Syntax \& Parser
   \item \label{orderProjectionAndTC} \ref{WPProjectionAndTC} Projection \& type checking
   \item \label{orderGenSchedulers} \ref{WPGenSchedulers} Generating Schedulers
   \item \label{orderExplicitTypes} \ref{WPExplicitTypes} Expl. Local Types
-  \item \label{orderAnyFut} \ref{WPAnyFut} \texttt{Fut<}\emph{anything}\texttt{>}
   \item \label{orderAssertions} \ref{WPAssertions} Assertions
 \end{enumerate}
 
@@ -392,14 +391,14 @@ However, work on the thesis will probably begin around early May.
 Working Package & Alotted Time & Start Date & End Data \\
 \hline
 Pausable Schedulers & 2 weeks & & \\
-Integrating AST & 1.5 weeks & & \\
+\texttt{Fut<}\emph{anything}\texttt{>} & 1.5 weeks & & \\ % TODO: Vor oder nach pausierbaren Schedulern?
 Type Syntax \& Parser & 2 weeks & & \\
+Integrating AST & 1.5 weeks & & \\ % TODO: Wirklich hier runter tauschen?
 Projection \& type checking & 5 weeks & & \\
 Generating Schedulers (part 1) & 2.5 weeks & & \\
 Preparation for midway presentation & 1 week & & \\
 Generating Schedulers (part 2) & 2.5 weeks & & \\
 Expl. Local Types & 3 weeks & & \\
-\texttt{Fut<}\emph{anything}\texttt{>} & 1.5 weeks & & \\
 Assertions & 2.5 weeks & & \\
 Final revisions, preparation of final presentation & 2.5 weeks & &
 \end{tabular}

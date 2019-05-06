@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--Created by yFiles for HTML 2.2.0.1-->
-<graphml xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml.html/2.0/ygraphml.xsd " xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:demostyle="http://www.yworks.com/yFilesHTML/demos/FlatDemoStyle/1.0" xmlns:bpmn="http://www.yworks.com/xml/yfiles-for-html/bpmn/2.0" xmlns:demotablestyle="http://www.yworks.com/yFilesHTML/demos/FlatDemoTableStyle/1.0" xmlns:uml="http://www.yworks.com/yFilesHTML/demos/UMLDemoStyle/1.0" xmlns:compat="http://www.yworks.com/xml/yfiles-compat-arrows/1.0" xmlns:GraphvizNodeStyle="http://www.yworks.com/yFilesHTML/graphviz-node-style/1.0" xmlns:VuejsNodeStyle="http://www.yworks.com/demos/yfiles-vuejs-node-style/1.0" xmlns:y="http://www.yworks.com/xml/yfiles-common/3.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/3.0" xmlns:yjs="http://www.yworks.com/xml/yfiles-for-html/2.0/xaml" xmlns:sys="http://www.yworks.com/xml/yfiles-common/markup/primitives/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<graphml xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml.html/2.0/ygraphml.xsd " xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:demostyle="http://www.yworks.com/yFilesHTML/demos/FlatDemoStyle/1.0" xmlns:bpmn="http://www.yworks.com/xml/yfiles-for-html/bpmn/2.0" xmlns:demotablestyle="http://www.yworks.com/yFilesHTML/demos/FlatDemoTableStyle/1.0" xmlns:uml="http://www.yworks.com/yFilesHTML/demos/UMLDemoStyle/1.0" xmlns:compat="http://www.yworks.com/xml/yfiles-compat-arrows/1.0" xmlns:GraphvizNodeStyle="http://www.yworks.com/yFilesHTML/graphviz-node-style/1.0" xmlns:VuejsNodeStyle="http://www.yworks.com/demos/yfiles-vuejs-node-style/1.0" xmlns:y="http://www.yworks.com/xml/yfiles-common/3.0" xmlns:x="http://www.yworks.com/xml/yfiles-common/markup/3.0" xmlns:yjs="http://www.yworks.com/xml/yfiles-for-html/2.0/xaml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<key id="d0" for="node" attr.type="boolean" attr.name="Expanded" y:attr.uri="http://www.yworks.com/xml/yfiles-common/2.0/folding/Expanded">
 		<default>true</default>
 	</key>
@@ -35,17 +35,9 @@
 			<yjs:Font x:Key="1" fontSize="12" fontFamily="'Arial'"/>
 			<yjs:SolidColorFill x:Key="2" color="#00222222"/>
 			<yjs:SolidColorFill x:Key="3" color="#FF222222"/>
-			<yjs:Stroke x:Key="4" fill="{y:GraphMLReference 3}" lineCap="SQUARE">
-				<yjs:Stroke.thickness>
-					<sys:Double>1</sys:Double>
-				</yjs:Stroke.thickness>
-			</yjs:Stroke>
+			<yjs:Stroke x:Key="4" fill="{y:GraphMLReference 3}" lineCap="SQUARE"/>
 			<yjs:Font x:Key="5" fontSize="12" fontFamily="'Arial'"/>
-			<yjs:Stroke x:Key="6" fill="#00222222" lineCap="SQUARE">
-				<yjs:Stroke.thickness>
-					<sys:Double>1</sys:Double>
-				</yjs:Stroke.thickness>
-			</yjs:Stroke>
+			<yjs:Stroke x:Key="6" fill="#00222222" lineCap="SQUARE"/>
 			<yjs:DefaultLabelStyle x:Key="7" font="{y:GraphMLReference 1}" textFill="BLACK"/>
 			<yjs:Stroke x:Key="8" fill="#FF336699"/>
 			<yjs:PolylineEdgeStyle x:Key="9" stroke="{y:GraphMLReference 8}">
@@ -73,16 +65,12 @@
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-138.875" Y="-319.625" Width="115" Height="30"/>
+				<y:RectD X="-134.375" Y="-319.625" Width="115" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle fill="{y:GraphMLReference 2}">
 					<yjs:ShapeNodeStyle.stroke>
-						<yjs:Stroke fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash">
-							<yjs:Stroke.thickness>
-								<sys:Double>1</sys:Double>
-							</yjs:Stroke.thickness>
-						</yjs:Stroke>
+						<yjs:Stroke fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash"/>
 					</yjs:ShapeNodeStyle.stroke>
 				</yjs:ShapeNodeStyle>
 			</data>
@@ -109,16 +97,12 @@
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-138.875" Y="-243" Width="115" Height="30"/>
+				<y:RectD X="-134.375" Y="-243" Width="115" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle fill="{y:GraphMLReference 2}">
 					<yjs:ShapeNodeStyle.stroke>
-						<yjs:Stroke fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash">
-							<yjs:Stroke.thickness>
-								<sys:Double>1</sys:Double>
-							</yjs:Stroke.thickness>
-						</yjs:Stroke>
+						<yjs:Stroke fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash"/>
 					</yjs:ShapeNodeStyle.stroke>
 				</yjs:ShapeNodeStyle>
 			</data>
@@ -146,7 +130,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-638.5" Y="-150.9375" Width="683.875" Height="51.375"/>
+				<y:RectD X="-670.5" Y="-150.9375" Width="715.875" Height="51.375"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -191,7 +175,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-627.25" Y="-141.125" Width="115" Height="30"/>
+				<y:RectD X="-657.25" Y="-141.125" Width="115" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -225,7 +209,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-120.125" Y="-403.1875" Width="77.5" Height="43.875"/>
+				<y:RectD X="-115.625" Y="-403.1875" Width="77.5" Height="43.875"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 6}" fill="{y:GraphMLReference 2}"/>
@@ -297,7 +281,7 @@ Extension]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[Merging Local Types]]></y:Label.Text>
+						<y:Label.Text><![CDATA[Incorporating Explicit Types]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -305,7 +289,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-428.375" Y="-141.125" Width="146.25" Height="30"/>
+				<y:RectD X="-462.375" Y="-141.125" Width="180.25" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -345,7 +329,7 @@ Extension]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[Comparing Local Types against AST]]></y:Label.Text>
+						<y:Label.Text><![CDATA[Checking AST against Local Types]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -353,7 +337,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-198.25" Y="-141.125" Width="233.75" Height="30"/>
+				<y:RectD X="-189.25" Y="-141.125" Width="224.75" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -437,7 +421,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-373.9375" Y="132.8125" Width="154.75" Height="30"/>
+				<y:RectD X="-389.9375" Y="132.8125" Width="154.75" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -481,11 +465,7 @@ formulas (optional)]]></y:Label.Text>
 			<data key="d6">
 				<yjs:ShapeNodeStyle fill="#FFEEEEEE">
 					<yjs:ShapeNodeStyle.stroke>
-						<yjs:Stroke fill="#FF555555" lineCap="SQUARE">
-							<yjs:Stroke.thickness>
-								<sys:Double>1</sys:Double>
-							</yjs:Stroke.thickness>
-						</yjs:Stroke>
+						<yjs:Stroke fill="#FF555555" lineCap="SQUARE"/>
 					</yjs:ShapeNodeStyle.stroke>
 				</yjs:ShapeNodeStyle>
 			</data>
@@ -513,16 +493,12 @@ formulas (optional)]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-390.4375" Y="220.375" Width="187.75" Height="44"/>
+				<y:RectD X="-406.4375" Y="220.375" Width="187.75" Height="44"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle fill="{y:GraphMLReference 2}">
 					<yjs:ShapeNodeStyle.stroke>
-						<yjs:Stroke fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash">
-							<yjs:Stroke.thickness>
-								<sys:Double>1</sys:Double>
-							</yjs:Stroke.thickness>
-						</yjs:Stroke>
+						<yjs:Stroke fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash"/>
 					</yjs:ShapeNodeStyle.stroke>
 				</yjs:ShapeNodeStyle>
 			</data>
