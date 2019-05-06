@@ -250,7 +250,7 @@ Extension [C,F]]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[Extension Parser [A]]]></y:Label.Text>
+						<y:Label.Text><![CDATA[Extension Parser [A, F]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -258,7 +258,7 @@ Extension [C,F]]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-539.4175498753116" Y="-278.46875" Width="134.375" Height="30"/>
+				<y:RectD X="-546.2925498753116" Y="-278.46875" Width="148.125" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>

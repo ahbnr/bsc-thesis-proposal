@@ -88,12 +88,12 @@
 
 \section{Motivation}
 Reasoning about distributed systems which employ asynchronous interactions between their
-components is usually difficult. % TODO: Redundant?
+components is usually difficult.
 For example, one might want to ensure, that said components adhere to a specific
 protocol, or that resources are properly allocated and released between uses.
 
 When manually checking a model of a distributed system against a protocol
-specification becomes to labor intensive and time consuming, automatic verification
+specification becomes too labor-intensive and time-consuming, automatic verification
 can reduce the workload and help to avoid human errors.
 
 Furthermore, if behavior can be dynamically added to the system during execution,
@@ -106,23 +106,21 @@ which do not violate it.
 
 \paragraph{Thesis Topic}
 
-The Abstract Behavioral Specification language (ABS) is intended for modelling
+The Abstract Behavioral Specification language (ABS) is intended for modeling
 ``distributed, object-oriented'' software systems \textcitep{johnsen2010abs} and
 aims for ``verifiable design'' \textcitep{hahnle2012abstract} via a suite of external tools.
 
-This thesis is based on % "new" correct? Really not mentioning authors of central source by name?
+This thesis is based on % TODO: "new" correct? Really not mentioning authors of central source by name?
 \textcitesp{kamburjan2018stateful, kamburjan2016session} and
 aims at developing a tool for automatically verifying whether objects within an
 ABS software model comply with a communication protocol, which is specified
-using a variant of Session Types. % (TODO: Konkreter).
+using Session Types.
 
 Furthermore, it will extend all participating objects with a scheduler \textcitep{bjork2013user} which
 ensures, that only those processes are activated that the protocol permits to execute.
 This is necessary, since the ABS Model API \textcitep{schlatte2018release} allows to asynchronously call methods during
 runtime, which will invalidate static verification.
 This idea has been explored in \textcitep{kamburjan2016session}.
-
-% Note that this approach can not guarantee 
 
 \textcite{kamburjan2018stateful} also introduce Async Dynamic Logic (ADL) such that ADL formulas can
 accompany protocol specifications and allow to express logical constraints on the
@@ -156,8 +154,7 @@ within the thesis document.
     as much as possible, such that no further complexity is introduced into the ABS
     compiler and the projects can be developed and maintained independently.
     
-    Therefore the verification tool shall parse its input from a file independent
-    from the ABS source code of the software model.
+    Therefore the verification tool shall parse its input from a file independent of the ABS source code of the software model.
 
     This working package includes:
     \begin{itemize}
@@ -191,7 +188,7 @@ within the thesis document.
       \item invoking parser for external type specifications as specified in working
         package \ref{WPsyntaxAndParser}.
       \item loading both data structures into the tool. After working packages
-        \ref{WPGenSchedulers} or \ref{WPAssertions} have been completed, this step will include enabling modifications to the AST using the external type definitons
+        \ref{WPGenSchedulers} or \ref{WPAssertions} have been completed, this step will include enabling modifications to the AST using the external type definitions
       \item passing (modified) AST back to ABS compiler to complete compilation
     \end{enumerate}
   \item[\namedlabel{Projection \& type checking local action order}{WPProjectionAndTC}]%
@@ -226,9 +223,6 @@ within the thesis document.
         may not return a process to execute (support for \texttt{Maybe<...>}
         return type).
         % \item this includes modifying the parser and AST generation % TODO It does not?
-        \item this does not include modifications to the (Erlang) backend
-          compiler. The necessary adjustments to the backend compiler have
-          already been implemented by the ABS developers. %TODO keine Namensnennung?
     \end{itemize}
   \item[\namedlabel{Generating schedulers}{WPGenSchedulers}]%
     To ensure the protocol specified by the external type definitions is not
@@ -250,31 +244,28 @@ within the thesis document.
 
     This can be used to specify valid behavior for an object across the whole
     protocol specification. For example, a file class shall only allow execution
-    of its ``read'' method in between invocations of its open and close methods.
+    of its ``read'' method in between invocations of its ``open'' and ``close'' methods.
 
     This working package includes:
     \begin{itemize}
       \item extending the syntax and parser of working package \ref{WPsyntaxAndParser}
         with support for explicit local types
-      \item extending type checker of working package \ref{WPProjectionAndTC} such
-        that it compares projected local types against explicit local ones to
-        determine compatibility
-      \item replace projected local types with explicit ones, if compatibility
-        test was successful.
+      \item extending the type checker of working package \ref{WPProjectionAndTC}, such
+        that it replaces projected local types with explicit local ones if explicit types have been defined for the class in question.
     \end{itemize}
   \item[\namedlabel{Extending ABS Future wrapper}{WPAnyFut}]%
-    Implementation of working package \ref{WPGenSchedulers} requires, that Futures
+    Implementation of working package \ref{WPGenSchedulers} requires, that futures
     from asynchronous method invocations may be saved without information on the
     wrapped return type. This is the case, since the generated schedulers will
-    most likely need to store futures for methods with different return types.
+    most likely need to store futures for multiple methods with different return types.
 
     As of now, this is not supported by the \texttt{Fut<T>} type of ABS and
     therefore the compiler frontend and the (Erlang) backend have to be extended.
 
     This working package includes:
     \begin{itemize}
-      \item extending ABS compiler frontend to support wrapping any type
-        \texttt{T} in Futures \texttt{Fut<T>}
+      \item extending the ABS compiler frontend to support wrapping an unknown
+        type ``\texttt{any}'' in Futures \texttt{Fut<T>}
       \item this includes modifying the parser and AST generation
         \item this does not include modifications to the (Erlang) backend
           compiler. The necessary adjustments to the backend compiler have
@@ -282,7 +273,7 @@ within the thesis document.
     \end{itemize}
   \item[\namedlabel{Optional: Generating assertions from ADL formulas}{WPAssertions}]%
     As outlined in \textcitep{kamburjan2018stateful}, the external type definitions
-    may carry ADL formulas which describe constraints on the models state during 
+    may carry ADL formulas which describe constraints on the model's state during 
     execution.
 
     Those formulas shall be checked during execution of the model by extending
@@ -307,15 +298,14 @@ The following (theoretical) limits are to be kept in mind while scheduling the
 working packages:
 
 A bachelor's thesis has to be written within 6 months.
-It should ammount to about 12 credit points of work, which translate to $12 \mathrm{CP} \cdot 30 \frac{\mathrm{h}}{\mathrm{CP}} = 360 \mathrm{h}$.
+It should amount to about 12 credit points of work, which translate to $12 \mathrm{CP} \cdot 30 \frac{\mathrm{h}}{\mathrm{CP}} = 360 \mathrm{h}$.
 Therefore, when assuming an even distribution of the work, this corresponds to about $14 \mathrm{h}$ per week.
 
 \paragraph{Dependencies between Working Packages}
 
 The working packages outlined in \ref{workpackages} partially depend on each other.
 This has to be kept in mind while planning the order of implementation of the
-packages. The following diagram illustrates the dependencies between the work
-packages.
+packages. The following diagram illustrates the dependencies between the working packages.
 
 \medskip
 
@@ -377,8 +367,8 @@ been determined.
 \begin{enumerate}[label=(\arabic*)]
   \item \label{orderExtendScheduler} \ref{WPExtendScheduler} Pausable Schedulers
   \item \label{orderAnyFut} \ref{WPAnyFut} \texttt{Fut<}\emph{anything}\texttt{>}
-  \item \label{orderPassAST} \ref{WPPassAST} Integrating AST
   \item \label{ordersyntaxAndParser} \ref{WPsyntaxAndParser} Type Syntax \& Parser
+  \item \label{orderPassAST} \ref{WPPassAST} Integrating AST
   \item \label{orderProjectionAndTC} \ref{WPProjectionAndTC} Projection \& type checking
   \item \label{orderGenSchedulers} \ref{WPGenSchedulers} Generating Schedulers
   \item \label{orderExplicitTypes} \ref{WPExplicitTypes} Expl. Local Types
@@ -387,22 +377,15 @@ been determined.
 
 The following considerations have influenced the decided order:
 \begin{itemize}
-  \item \ref{WPExtendScheduler} has been picked as first item, since the
-    backend modifications by R. Schlatte will require the ABS frontend compiler
-    to be modified first.
+  \item \ref{WPExtendScheduler} and \ref{WPAnyFut} have been picked as first items, such that necessary changes to Core ABS can be discussed with the ABS developers early on.
+
+    This also allows to get familiar with the internals of the ABS compiler.
   \item Since \ref{WPAssertions} is optional, it has been placed at the end of
     the list.
-  \item \ref{WPPassAST} is to be implemented before \ref{WPsyntaxAndParser} to
-    get more familiar with the internals of the ABS compiler early on.
 \end{itemize}
 
-\paragraph{Schedule}%
-%
+\paragraph{Schedule}% TODO: Kompatibilität mit Zeitplan für ABS workshop?
 Available time: 26 weeks.
-\\
-The ``Start Date''/``End Date'' fields are not yet filled in, since the
-starting point of the thesis is as of yet undetermined.
-However, work on the thesis will probably begin around early May.
 
 \medskip
 %
@@ -410,14 +393,14 @@ However, work on the thesis will probably begin around early May.
 \newcommand\nextdays[1]{\adddays{#1}\DTMusedate{mydate}}%
 \newcommand\nextday{\nextdays{1}}%
 \DTMsetstyle{ddmmyy}%
-
+%
 \begin{tabular}{llll}
-Working Package & Alotted Time & Start Date & End Date \\
+Working Package & Allotted Time & Start Date & End Date \\
 \hline
 Pausable Schedulers & 2 weeks                                  & \DTMusedate{mydate} & \nextdays{13} \\
-\texttt{Fut<}\emph{anything}\texttt{>} & 1.5 weeks             & \nextday & \nextdays{10} \\ % TODO: Vor oder nach pausierbaren Schedulern?
+\texttt{Fut<}\emph{anything}\texttt{>} & 1.5 weeks             & \nextday & \nextdays{10} \\
 Type Syntax \& Parser & 2 weeks                                & \nextday & \nextdays{13} \\
-Integrating AST & 1.5 weeks                                    & \nextday & \nextdays{10} \\ % TODO: Wirklich hier runter tauschen?
+Integrating AST & 1.5 weeks                                    & \nextday & \nextdays{10} \\
 Projection \& type checking & 5 weeks                          & \nextday & \nextdays{34} \\
 Generating Schedulers (part 1) & 2.5 weeks                     & \nextday & \nextdays{17} \\
 Preparation for midway presentation & 1 week                   & \nextday & \nextdays{6} \\
@@ -430,8 +413,8 @@ Final revisions, preparation of final presentation & 2.5 weeks & \nextday & \nex
 \medskip
 
 Increased preparation effort for exams is to be expected around the time from
-the 8th of July to the 8th of August. This corresponds to about 9.5 weeks from the
-start of the thesis when assuming the 1st of May as starting point.
+the 8th of July to the 8th of August. This corresponds to about 8.5 weeks from the
+start of the thesis when assuming the 8th of May as starting point.
 Since around that time the working packages with the biggest time frames are
 scheduled, this should provide a slight safety margin to account for the
 heightened workload.
