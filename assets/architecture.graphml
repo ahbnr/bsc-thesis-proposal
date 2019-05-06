@@ -38,14 +38,16 @@
 			<yjs:Stroke x:Key="4" fill="{y:GraphMLReference 3}" lineCap="SQUARE"/>
 			<yjs:Font x:Key="5" fontSize="12" fontFamily="'Arial'"/>
 			<yjs:Stroke x:Key="6" fill="#00222222" lineCap="SQUARE"/>
-			<yjs:DefaultLabelStyle x:Key="7" font="{y:GraphMLReference 1}" textFill="BLACK"/>
-			<yjs:Stroke x:Key="8" fill="#FF336699"/>
-			<yjs:PolylineEdgeStyle x:Key="9" stroke="{y:GraphMLReference 8}">
+			<y:ExteriorLabelModel x:Key="7" Insets="5"/>
+			<yjs:Stroke x:Key="8" fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash"/>
+			<yjs:DefaultLabelStyle x:Key="9" font="{y:GraphMLReference 1}" textFill="BLACK"/>
+			<yjs:Stroke x:Key="10" fill="#FF336699"/>
+			<yjs:PolylineEdgeStyle x:Key="11" stroke="{y:GraphMLReference 10}">
 				<yjs:PolylineEdgeStyle.targetArrow>
-					<yjs:Arrow type="TRIANGLE" scale="0.75" stroke="{y:GraphMLReference 8}" fill="#FF336699" cropLength="1"/>
+					<yjs:Arrow type="TRIANGLE" scale="0.75" stroke="{y:GraphMLReference 10}" fill="#FF336699" cropLength="1"/>
 				</yjs:PolylineEdgeStyle.targetArrow>
 			</yjs:PolylineEdgeStyle>
-			<y:SmartEdgeLabelModelParameter x:Key="10" Distance="5">
+			<y:SmartEdgeLabelModelParameter x:Key="12" Distance="5">
 				<y:SmartEdgeLabelModelParameter.Model>
 					<y:SmartEdgeLabelModel/>
 				</y:SmartEdgeLabelModelParameter.Model>
@@ -59,13 +61,13 @@
 		<node id="n0">
 			<data key="d3">
 				<x:List>
-					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}" Style="{y:GraphMLReference 7}">
-						<y:Label.Text><![CDATA[ABS Parser]]></y:Label.Text>
+					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}" Style="{y:GraphMLReference 9}">
+						<y:Label.Text><![CDATA[ABS Parser [G]]]></y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-134.375" Y="-319.625" Width="115" Height="30"/>
+				<y:RectD X="-132.625" Y="-319.625" Width="115" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle fill="{y:GraphMLReference 2}">
@@ -89,7 +91,7 @@
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[ABS Typechecker]]></y:Label.Text>
+						<y:Label.Text><![CDATA[ABS Typechecker [G]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -97,7 +99,7 @@
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-134.375" Y="-243" Width="115" Height="30"/>
+				<y:RectD X="-142.3125" Y="-243" Width="134.375" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle fill="{y:GraphMLReference 2}">
@@ -122,7 +124,7 @@
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:ExteriorLabelModel.West}">
 						<y:Label.Text><![CDATA[Typechecker
-Extension]]></y:Label.Text>
+Extension [C,F]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle horizontalTextAlignment="CENTER" font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -167,7 +169,7 @@ Extension]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text>Projection</y:Label.Text>
+						<y:Label.Text><![CDATA[Projection [C]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -209,7 +211,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-115.625" Y="-403.1875" Width="77.5" Height="43.875"/>
+				<y:RectD X="-113.875" Y="-403.1875" Width="77.5" Height="43.875"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 6}" fill="{y:GraphMLReference 2}"/>
@@ -248,7 +250,7 @@ Extension]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[Extension Parser]]></y:Label.Text>
+						<y:Label.Text><![CDATA[Extension Parser [A]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -256,7 +258,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-529.7300498753116" Y="-278.46875" Width="115" Height="30"/>
+				<y:RectD X="-539.4175498753116" Y="-278.46875" Width="134.375" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -281,7 +283,7 @@ Extension]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[Incorporating Explicit Types]]></y:Label.Text>
+						<y:Label.Text><![CDATA[Incorporating Explicit Types [F]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -289,7 +291,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-462.375" Y="-141.125" Width="180.25" Height="30"/>
+				<y:RectD X="-462.375" Y="-141.125" Width="196.5" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -329,7 +331,7 @@ Extension]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[Checking AST against Local Types]]></y:Label.Text>
+						<y:Label.Text><![CDATA[Checking AST against Local Types [C]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -337,7 +339,7 @@ Extension]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d4">
-				<y:RectD X="-189.25" Y="-141.125" Width="224.75" Height="30"/>
+				<y:RectD X="-189.25" Y="-141.125" Width="228.25" Height="30"/>
 			</data>
 			<data key="d6">
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
@@ -413,7 +415,7 @@ Extension]]></y:Label.Text>
 			<data key="d3">
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
-						<y:Label.Text><![CDATA[Integration into AST]]></y:Label.Text>
+						<y:Label.Text><![CDATA[Integration into AST [B]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -452,7 +454,7 @@ Extension]]></y:Label.Text>
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:InteriorLabelModel.Center}">
 						<y:Label.Text><![CDATA[Building assertions from ADL
-formulas (optional)]]></y:Label.Text>
+formulas (optional) [H]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle horizontalTextAlignment="CENTER" font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -496,11 +498,7 @@ formulas (optional)]]></y:Label.Text>
 				<y:RectD X="-406.4375" Y="220.375" Width="187.75" Height="44"/>
 			</data>
 			<data key="d6">
-				<yjs:ShapeNodeStyle fill="{y:GraphMLReference 2}">
-					<yjs:ShapeNodeStyle.stroke>
-						<yjs:Stroke fill="{y:GraphMLReference 3}" lineCap="SQUARE" dashStyle="Dash"/>
-					</yjs:ShapeNodeStyle.stroke>
-				</yjs:ShapeNodeStyle>
+				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 8}" fill="{y:GraphMLReference 2}"/>
 			</data>
 			<port name="p0">
 				<data key="d15">
@@ -513,7 +511,7 @@ formulas (optional)]]></y:Label.Text>
 				<x:List>
 					<y:Label LayoutParameter="{x:Static y:ExteriorLabelModel.West}">
 						<y:Label.Text><![CDATA[Scheduler
-Generator]]></y:Label.Text>
+Generator [D,E]]]></y:Label.Text>
 						<y:Label.Style>
 							<yjs:DefaultLabelStyle horizontalTextAlignment="CENTER" font="{y:GraphMLReference 1}" textFill="BLACK"/>
 						</y:Label.Style>
@@ -527,10 +525,48 @@ Generator]]></y:Label.Text>
 				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 4}" fill="{y:GraphMLReference 2}"/>
 			</data>
 		</node>
+		<node id="n15">
+			<data key="d3">
+				<x:List>
+					<y:Label>
+						<y:Label.Text><![CDATA[= already exists (but may be extended)]]></y:Label.Text>
+						<y:Label.LayoutParameter>
+							<y:CompositeLabelModelParameter>
+								<y:CompositeLabelModelParameter.Parameter>
+									<y:ExteriorLabelModelParameter Position="East" Model="{y:GraphMLReference 7}"/>
+								</y:CompositeLabelModelParameter.Parameter>
+								<y:CompositeLabelModelParameter.Model>
+									<y:CompositeLabelModel>
+										<y:CompositeLabelModel.LabelModels>
+											<y:GraphMLReference ResourceKey="7"/>
+											<y:InteriorLabelModel/>
+											<y:FreeNodeLabelModel/>
+										</y:CompositeLabelModel.LabelModels>
+									</y:CompositeLabelModel>
+								</y:CompositeLabelModelParameter.Model>
+							</y:CompositeLabelModelParameter>
+						</y:Label.LayoutParameter>
+						<y:Label.Style>
+							<yjs:DefaultLabelStyle verticalTextAlignment="BOTTOM" horizontalTextAlignment="CENTER" textFill="#A8000000" textSize="9">
+								<yjs:DefaultLabelStyle.font>
+									<yjs:Font fontSize="9" fontFamily="'Arial'"/>
+								</yjs:DefaultLabelStyle.font>
+							</yjs:DefaultLabelStyle>
+						</y:Label.Style>
+					</y:Label>
+				</x:List>
+			</data>
+			<data key="d4">
+				<y:RectD X="-753.8125" Y="247.9375" Width="62.3125" Height="16.4375"/>
+			</data>
+			<data key="d6">
+				<yjs:ShapeNodeStyle stroke="{y:GraphMLReference 8}" fill="{y:GraphMLReference 2}"/>
+			</data>
+		</node>
 		<edge id="e0" source="n0" target="n1" sourceport="p0" targetport="p1">
 			<data key="d10">
 				<x:List>
-					<y:Label Style="{y:GraphMLReference 7}">
+					<y:Label Style="{y:GraphMLReference 9}">
 						<y:Label.Text>AST</y:Label.Text>
 						<y:Label.LayoutParameter>
 							<y:SmartEdgeLabelModelParameter Distance="5">
@@ -543,35 +579,35 @@ Generator]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e1" source="n4" target="n0" sourceport="p0" targetport="p1">
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e2" source="n5" target="n6" sourceport="p0" targetport="p1">
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e3" source="n6" target="n3" sourceport="p0" targetport="p2">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text><![CDATA[Global Type]]></y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e4" source="n6" target="n7" sourceport="p2" targetport="p4">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}">
 						<y:Label.Text><![CDATA[Explicit Local
 Scheduler Types]]></y:Label.Text>
 						<y:Label.Style>
@@ -581,26 +617,26 @@ Scheduler Types]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e5" source="n3" target="n7" sourceport="p0" targetport="p5">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text><![CDATA[Local Types]]></y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e6" source="n1" target="n8" sourceport="p0" targetport="p0">
 			<data key="d10">
 				<x:List>
-					<y:Label Style="{y:GraphMLReference 7}">
-						<y:Label.Text>AST</y:Label.Text>
+					<y:Label Style="{y:GraphMLReference 9}">
+						<y:Label.Text><![CDATA[AST [B]]]></y:Label.Text>
 						<y:Label.LayoutParameter>
 							<y:SmartEdgeLabelModelParameter Distance="5">
 								<y:SmartEdgeLabelModelParameter.Model>
@@ -612,52 +648,52 @@ Scheduler Types]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e7" source="n7" target="n2" sourceport="p0" targetport="p0">
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e8" source="n7" target="n2" sourceport="p1" targetport="p1">
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e9" source="n7" target="n2" sourceport="p2" targetport="p2">
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e10" source="n7" target="n8" sourceport="p3" targetport="p1">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text><![CDATA[Local Types]]></y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e11" source="n2" target="n9" sourceport="p4" targetport="p1">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text><![CDATA[Local Types]]></y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e12" source="n9" target="n10" sourceport="p0" targetport="p0">
 			<data key="d10">
 				<x:List>
-					<y:Label Style="{y:GraphMLReference 7}">
+					<y:Label Style="{y:GraphMLReference 9}">
 						<y:Label.Text>Automata</y:Label.Text>
 						<y:Label.LayoutParameter>
 							<y:SmartEdgeLabelModelParameter SegmentRatio="0.28160919540229884" Distance="5">
@@ -670,66 +706,66 @@ Scheduler Types]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e13" source="n10" target="n11" sourceport="p1" targetport="p0">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text>Schedulers</y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e14" source="n2" target="n11" sourceport="p5" targetport="p2">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text>AST</y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e15" source="n2" target="n12" sourceport="p6" targetport="p1">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text><![CDATA[Local Types]]></y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e16" source="n12" target="n11" sourceport="p0" targetport="p1">
 			<data key="d10">
 				<x:List>
-					<y:Label LayoutParameter="{y:GraphMLReference 10}" Style="{y:GraphMLReference 7}">
+					<y:Label LayoutParameter="{y:GraphMLReference 12}" Style="{y:GraphMLReference 9}">
 						<y:Label.Text>Assertions</y:Label.Text>
 					</y:Label>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e17" source="n3" target="n2" sourceport="p1" targetport="p3">
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 		<edge id="e18" source="n11" target="n13" sourceport="p3" targetport="p0">
 			<data key="d10">
 				<x:List>
-					<y:Label Style="{y:GraphMLReference 7}">
+					<y:Label Style="{y:GraphMLReference 9}">
 						<y:Label.Text><![CDATA[Extended AST]]></y:Label.Text>
 						<y:Label.LayoutParameter>
 							<y:SmartEdgeLabelModelParameter SegmentRatio="0.4292364990689013" Distance="5">
@@ -742,7 +778,7 @@ Scheduler Types]]></y:Label.Text>
 				</x:List>
 			</data>
 			<data key="d12">
-				<y:GraphMLReference ResourceKey="9"/>
+				<y:GraphMLReference ResourceKey="11"/>
 			</data>
 		</edge>
 	</graph>

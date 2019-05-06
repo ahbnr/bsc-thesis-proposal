@@ -8,8 +8,26 @@
 
 \documentclass[paper=a4,nochapname,accentcolor=tud9c]{tudexercise}
 
-\usepackage{biblatex}[defernumbers=true]
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage[maxcitenames=2]{biblatex}
 \addbibresource{References.bib}
+
+\newcommand\textcitep[1]{\mkbibparens{\textcite{#1}}}
+\newcommand\textcitesp[1]{\mkbibparens{\textcites{#1}}}
+
+\usepackage[calc,useregional]{datetime2}
+\newcount\mydatect
+\newcount\datecount
+\newcommand{\setdate}[1]{%
+    \DTMsavedate{mydate}{#1}%
+    \DTMmakeglobal{mydate}%
+}%
+\newcommand{\adddays}[1]{%
+    \DTMsaveddateoffsettojulianday{mydate}{#1}{\mydatect}%
+    \DTMsavejulianday{mydate}{\number\mydatect}%
+    \DTMmakeglobal{mydate}%
+}%
 
 \usepackage{blindtext}
 \usepackage{float}
@@ -89,28 +107,28 @@ which do not violate it.
 \paragraph{Thesis Topic}
 
 The Abstract Behavioral Specification language (ABS) is intended for modelling
-``distributed, object-oriented'' software systems \cite{johnsen2010abs} and
-aims for ``verifiable design'' via a suite of external tools \cite{absdesign}.
+``distributed, object-oriented'' software systems \textcitep{johnsen2010abs} and
+aims for ``verifiable design'' \textcitep{hahnle2012abstract} via a suite of external tools.
 
 This thesis is based on % "new" correct? Really not mentioning authors of central source by name?
-\cite{kamburjan2018stateful, kamburjan2016session} and
+\textcitesp{kamburjan2018stateful, kamburjan2016session} and
 aims at developing a tool for automatically verifying whether objects within an
 ABS software model comply with a communication protocol, which is specified
 using a variant of Session Types. % (TODO: Konkreter).
 
-Furthermore, it will extend all participating objects with a scheduler \cite{bjork2013user} which
+Furthermore, it will extend all participating objects with a scheduler \textcitep{bjork2013user} which
 ensures, that only those processes are activated that the protocol permits to execute.
-This is necessary, since the ABS Model API \cite{schlatte2018release} allows to asynchronously call methods during
+This is necessary, since the ABS Model API \textcitep{schlatte2018release} allows to asynchronously call methods during
 runtime, which will invalidate static verification.
-This idea has been explored in \cite{kamburjan2016session}.
+This idea has been explored in \textcitep{kamburjan2016session}.
 
 % Note that this approach can not guarantee 
 
-\cite{kamburjan2018stateful} also introduces Async Dynamic Logic (ADL) such that ADL formulas can
+\textcite{kamburjan2018stateful} also introduce Async Dynamic Logic (ADL) such that ADL formulas can
 accompany protocol specifications and allow to express logical constraints on the
 program state before method invocations and after their termination.
 Although automatic verification of those constraints could  be implemented using
-KeY-ABS \cite{din2015key}, it will likely exceed the time available for
+KeY-ABS \textcitep{din2015key}, it will likely exceed the time available for
 implementing the thesis.
 Instead, those constraints will optionally be implemented as runtime assertions,
 if time allows.
@@ -120,7 +138,7 @@ if time allows.
 \begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{assets/architecture.pdf}
-  \caption{Expected internal structure of the verification tool (TODO: Reference figure from working packages)}
+  \caption{Expected internal structure of the verification tool. The approximate scope of the working packages has been annotated using the [$\cdot$] notation.}
 \end{figure}
 
 All of the following working packages include a time investment proportional to the
@@ -143,7 +161,7 @@ within the thesis document.
 
     This working package includes:
     \begin{itemize}
-      \item deriving a practical syntax for defining Session Types from \cite{kamburjan2018stateful} and \cite{kamburjan2016session}
+      \item deriving a practical syntax for defining Session Types from \textcitep{kamburjan2018stateful} and \textcitep{kamburjan2016session}
       \item developing a parser which provides the types as a data structure
         suitable for...
       \begin{itemize}
@@ -187,7 +205,7 @@ within the thesis document.
     \begin{itemize}
       \item implementing projection
       \item implementing a type checker which statically ensures that the
-        types are well-formed and the model is well-typed \cite{kamburjan2018stateful}
+        types are well-formed and the model is well-typed \textcitep{kamburjan2018stateful}
         \begin{itemize}
           \item this does not include checking for deadlocks or verifying ADL
             formulas embedded within the types (see \ref{WPAssertions})
@@ -214,20 +232,20 @@ within the thesis document.
     \end{itemize}
   \item[\namedlabel{Generating schedulers}{WPGenSchedulers}]%
     To ensure the protocol specified by the external type definitions is not
-    violated at runtime due to calls via the Model API \cite{schlatte2018release}, scheduler functions \cite{bjork2013user}
+    violated at runtime due to calls via the Model API \textcitep{schlatte2018release}, scheduler functions \textcitep{bjork2013user}
     shall be generated from the type definitions for all objects participating
     in the protocol and integrated into the AST of the software model.
 
     This working package includes:
     \begin{itemize}
-      \item deriving Session Automata \cite{kamburjan2016session} from the type definitions.
-      \item transforming the Session Automata into pure scheduler functions \cite{bjork2013user}
+      \item deriving Session Automata \textcitep{kamburjan2016session} from the type definitions.
+      \item transforming the Session Automata into pure scheduler functions \textcitep{bjork2013user}
       \item validating, that the constructed scheduler functions indeed comply with the
         type specification
       \item integrating the schedulers into the AST provided by the ABS compiler
     \end{itemize}
   \item[\namedlabel{Explicit local types}{WPExplicitTypes}]%
-    As presented in \cite{kamburjan2016session}, types may explicitly be
+    As presented in \textcitep{kamburjan2016session}, types may explicitly be
     formulated for specific classes, not only as one global specification.
 
     This can be used to specify valid behavior for an object across the whole
@@ -245,11 +263,12 @@ within the thesis document.
         test was successful.
     \end{itemize}
   \item[\namedlabel{Extending ABS Future wrapper}{WPAnyFut}]%
-    Implementation of working package \ref{WPAssertions} requires, that asynchronous method
-    invocations may not only return objects, but data of any type, since the ADL
-    formulas as described in \cite{kamburjan2018stateful} allow to reason about the state of returned results of methods, which may belong to any type.
+    Implementation of working package \ref{WPGenSchedulers} requires, that Futures
+    from asynchronous method invocations may be saved without information on the
+    wrapped return type. This is the case, since the generated schedulers will
+    most likely need to store futures for methods with different return types.
 
-    As of now, this this not supported by the \texttt{Fut<T>} type of ABS and
+    As of now, this is not supported by the \texttt{Fut<T>} type of ABS and
     therefore the compiler frontend and the (Erlang) backend have to be extended.
 
     This working package includes:
@@ -262,12 +281,12 @@ within the thesis document.
           already been implemented by the ABS developers. %TODO keine Namensnennung?
     \end{itemize}
   \item[\namedlabel{Optional: Generating assertions from ADL formulas}{WPAssertions}]%
-    As outlined in \cite{kamburjan2018stateful}, the external type definitions
+    As outlined in \textcitep{kamburjan2018stateful}, the external type definitions
     may carry ADL formulas which describe constraints on the models state during 
     execution.
 
     Those formulas shall be checked during execution of the model by extending
-    the AST with assertion statements \cite{absassertions} which implement the
+    the AST with assertion statements \textcitep{absassertions} which implement the
     constraints described by the formula.
 
     This working package includes:
@@ -314,9 +333,6 @@ packages.
   \node (ProjectionAndTC)
         [draw,rounded rectangle,below right=of PassAST]
         {\ref{WPProjectionAndTC} Projection \& type checking \ref{orderProjectionAndTC}};
-  \node (AnyFut)
-        [draw,rounded rectangle,above=of PassAST]
-        {\ref{WPAnyFut} \texttt{Fut<}\emph{anything}\texttt{>} \ref{orderAnyFut}};
   \node (ExplicitTypes)
         [draw,rounded rectangle,right=of ProjectionAndTC]
         {\ref{WPExplicitTypes} Expl. Local Types \ref{orderExplicitTypes}};
@@ -329,24 +345,27 @@ packages.
   \node (ExtendScheduler)
         [draw,rounded rectangle,below=of syntaxAndParser]
         {\ref{WPExtendScheduler} Pausable Schedulers \ref{orderExtendScheduler}};
+  \node (AnyFut)
+        [draw,rounded rectangle,below=of ExtendScheduler]
+        {\ref{WPAnyFut} \texttt{Fut<}\emph{anything}\texttt{>} \ref{orderAnyFut}};
   \node (End)
         [draw,rounded rectangle,double,double distance=0.7mm,right=of ExplicitTypes]
         {Completion};
 
-      \draw[->] (start) -- (syntaxAndParser);
-      \draw[->] (start) -- (PassAST);
-  \draw[->] (start) to[bend left] (AnyFut);
+  \draw[->] (start) -- (syntaxAndParser);
+  \draw[->] (start) -- (PassAST);
+  \draw[->] (start) to[bend right] (AnyFut);
   \draw[->] (start) to[bend right] (ExtendScheduler);
   \draw[->] (syntaxAndParser) -- (ProjectionAndTC);
   \draw[->] (ProjectionAndTC) -- (ExplicitTypes);
   \draw[->] (ProjectionAndTC) -- (GenSchedulers);
   \draw[->] (ProjectionAndTC) -- (Assertions);
   \draw[->] (PassAST) -- (ProjectionAndTC);
-  \draw[->] (AnyFut) -- (Assertions);
   \draw[->] (Assertions) -- (End);
   \draw[->] (ExplicitTypes) -- (End);
   \draw[->] (GenSchedulers) -- (End);
   \draw[->] (ExtendScheduler) -- (GenSchedulers);
+  \draw[->] (AnyFut) -- (GenSchedulers);
 \end{tikzpicture}
 }
 
@@ -386,21 +405,26 @@ starting point of the thesis is as of yet undetermined.
 However, work on the thesis will probably begin around early May.
 
 \medskip
+%
+\setdate{2019-05-08}%
+\newcommand\nextdays[1]{\adddays{#1}\DTMusedate{mydate}}%
+\newcommand\nextday{\nextdays{1}}%
+\DTMsetstyle{ddmmyy}%
 
 \begin{tabular}{llll}
-Working Package & Alotted Time & Start Date & End Data \\
+Working Package & Alotted Time & Start Date & End Date \\
 \hline
-Pausable Schedulers & 2 weeks & & \\
-\texttt{Fut<}\emph{anything}\texttt{>} & 1.5 weeks & & \\ % TODO: Vor oder nach pausierbaren Schedulern?
-Type Syntax \& Parser & 2 weeks & & \\
-Integrating AST & 1.5 weeks & & \\ % TODO: Wirklich hier runter tauschen?
-Projection \& type checking & 5 weeks & & \\
-Generating Schedulers (part 1) & 2.5 weeks & & \\
-Preparation for midway presentation & 1 week & & \\
-Generating Schedulers (part 2) & 2.5 weeks & & \\
-Expl. Local Types & 3 weeks & & \\
-Assertions & 2.5 weeks & & \\
-Final revisions, preparation of final presentation & 2.5 weeks & &
+Pausable Schedulers & 2 weeks                                  & \DTMusedate{mydate} & \nextdays{13} \\
+\texttt{Fut<}\emph{anything}\texttt{>} & 1.5 weeks             & \nextday & \nextdays{10} \\ % TODO: Vor oder nach pausierbaren Schedulern?
+Type Syntax \& Parser & 2 weeks                                & \nextday & \nextdays{13} \\
+Integrating AST & 1.5 weeks                                    & \nextday & \nextdays{10} \\ % TODO: Wirklich hier runter tauschen?
+Projection \& type checking & 5 weeks                          & \nextday & \nextdays{34} \\
+Generating Schedulers (part 1) & 2.5 weeks                     & \nextday & \nextdays{17} \\
+Preparation for midway presentation & 1 week                   & \nextday & \nextdays{6} \\
+Generating Schedulers (part 2) & 2.5 weeks                     & \nextday & \nextdays{17} \\
+Expl. Local Types & 3 weeks                                    & \nextday & \nextdays{20} \\
+Assertions & 2.5 weeks                                         & \nextday & \nextdays{17} \\
+Final revisions, preparation of final presentation & 2.5 weeks & \nextday & \nextdays{17}
 \end{tabular}
 
 \medskip
